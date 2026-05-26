@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fullstackprog-app
+  namespace: fullstackprog
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fullstackprog-app
+  template:
+    metadata:
+      labels:
+        app: fullstackprog-app
+    spec:
+      containers:
+        - name: fullstackprog-app
+          image: ghcr.io/cl-krma/fullstackprog:5c72dc657b07209e674a8f9e2b571be4ebeb9b8d
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_HOST
+              value: db
+            - name: DB_USER
+              value: user
+            - name: DB_PASS
+              value: pass
+            - name: DB_NAME
+              value: myapp
+            - name: JWT_SECRET
+              value: secretKey
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fullstackprog-app-service
+  namespace: fullstackprog
+spec:
+  selector:
+    app: fullstackprog-app
+  ports:
+    - port: 80
+      targetPort: 3000
