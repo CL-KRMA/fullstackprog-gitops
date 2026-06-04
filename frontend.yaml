@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: fullstackprog-app
-          image: ghcr.io/cl-krma/fullstackprog-app:685e3801191bdd5dbf31dfcfdcbadedc2c879c0d
+          image: ghcr.io/cl-krma/fullstackprog-app:1eb2a87435c73c4455c61bd9cd98393f519daf6a
           ports:
             - containerPort: 3000
           env:
